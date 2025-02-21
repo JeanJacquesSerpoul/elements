@@ -198,7 +198,7 @@ document.querySelectorAll('.element').forEach(element => {
         }
 
         modal.style.left = `${x}px`;
-        modal.style.top = `${y}px`;        
+        modal.style.top = `${y}px`;
         modal.style.display = 'block';
         createAtomVisualization(elementNumber); // Génère l'animation 3D
     });
@@ -242,7 +242,9 @@ function createAtomVisualization(elementNumber) {
             const electron = new THREE.Mesh(electronGeometry, electronMaterial);
 
             electron.position.x = radius * Math.cos(angle);
-            electron.position.z = radius * Math.sin(angle);
+            electron.position.y = radius * Math.sin(angle); // Rotation sur l'axe Y
+            electron.position.z = 0; // Pour s'assurer qu'ils sont bien à plat
+
 
             scene.add(electron);
         }
@@ -251,7 +253,9 @@ function createAtomVisualization(elementNumber) {
         if (remainingElectrons <= 0) break;
     }
 
-    camera.position.z = 5;
+    camera.position.y = 5; // Vue de haut
+    camera.lookAt(0, 0, 0); // Regarde vers le centre du noyau
+
 
     function animate() {
         requestAnimationFrame(animate);
