@@ -175,3 +175,28 @@ body {
         font-size: 12px;
     }
 }
+
+/* Style pour la légende */
+.legend {
+    margin: 20px auto;
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .legend-color {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #000;
+    margin-right: 5px;
+    display: inline-block;
+  }
+  
