@@ -1,6 +1,7 @@
- /* Style général */
- body {
+/* Style général */
+body {
     font-family: Arial, sans-serif;
+    margin: 20px;
     display: flex;
     justify-content: center;
 }
@@ -9,8 +10,9 @@
 .periodic-table {
     display: grid;
     grid-template-columns: repeat(18, 60px);
-    grid-gap: 3px;
-    max-width: 1300px;
+    grid-gap: 5px;
+    max-width: 1000px;
+    /* Réduit de 1200px à 1000px */
 }
 
 /* Style des éléments */
@@ -49,16 +51,45 @@
 }
 
 /* Couleurs par catégorie */
-.non-metal { background-color: #a1d8e6; }
-.noble-gas { background-color: #c0c0c0; }
-.alkali-metal { background-color: #ff9999; }
-.alkaline-earth-metal { background-color: #ffcc99; }
-.metalloid { background-color: #ccff99; }
-.halogen { background-color: #99ccff; }
-.transition-metal { background-color: #ff99cc; }
-.post-transition-metal { background-color: #99ffcc; }
-.lanthanide { background-color: #ffcc66; }
-.actinide { background-color: #ff66cc; }
+.non-metal {
+    background-color: #a1d8e6;
+}
+
+.noble-gas {
+    background-color: #c0c0c0;
+}
+
+.alkali-metal {
+    background-color: #ff9999;
+}
+
+.alkaline-earth-metal {
+    background-color: #ffcc99;
+}
+
+.metalloid {
+    background-color: #ccff99;
+}
+
+.halogen {
+    background-color: #99ccff;
+}
+
+.transition-metal {
+    background-color: #ff99cc;
+}
+
+.post-transition-metal {
+    background-color: #99ffcc;
+}
+
+.lanthanide {
+    background-color: #ffcc66;
+}
+
+.actinide {
+    background-color: #ff66cc;
+}
 
 /* Classes pour les espaces vides */
 .empty {
@@ -71,14 +102,17 @@
     .periodic-table {
         grid-template-columns: repeat(18, 40px);
     }
+
     .element {
         min-width: 30px;
         min-height: 30px;
         font-size: 10px;
     }
+
     .symbol {
         font-size: 12px;
     }
+
     .name {
         font-size: 6px;
     }
@@ -132,9 +166,11 @@
         width: 200px;
         padding: 10px;
     }
+
     .modal-content h2 {
         font-size: 18px;
     }
+
     .modal-content p {
         font-size: 12px;
     }
