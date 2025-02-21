@@ -167,6 +167,7 @@ const closeModal = document.getElementById('closeModal');
 
 document.querySelectorAll('.element').forEach(element => {
     element.addEventListener('click', (e) => {
+        const elementNumber = parseInt(element.dataset.number, 10)
         modalSymbol.textContent = element.dataset.symbol;
         modalName.textContent = element.dataset.name;
         modalElectronConfig.textContent = `Configuration électronique: ${element.dataset.electronConfig}`;
