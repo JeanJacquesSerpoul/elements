@@ -160,15 +160,22 @@ const modal = document.getElementById('elementModal');
 const modalSymbol = document.getElementById('modalSymbol');
 const modalName = document.getElementById('modalName');
 const modalElectronConfig = document.getElementById('modalElectronConfig');
+const modalCategory = document.createElement('p');
+modalCategory.id = 'modalCategory';
+
 const closeModal = document.getElementById('closeModal');
 
-// Afficher la fenêtre modale à côté du clic/toucher
 document.querySelectorAll('.element').forEach(element => {
     element.addEventListener('click', (e) => {
-        // Remplir les informations
         modalSymbol.textContent = element.dataset.symbol;
         modalName.textContent = element.dataset.name;
         modalElectronConfig.textContent = `Configuration électronique: ${element.dataset.electronConfig}`;
+        modalCategory.textContent = `Catégorie : ${element.classList[1]}`; // Ajoute la catégorie
+
+        // Ajoute la catégorie à la modale si elle n'y est pas déjà
+        if (!modal.contains(modalCategory)) {
+            modal.appendChild(modalCategory);
+        }
 
         // Positionner la fenêtre
         const modalWidth = modal.offsetWidth;
@@ -176,32 +183,25 @@ document.querySelectorAll('.element').forEach(element => {
         const viewportWidth = window.innerWidth;
         const viewportHeight = window.innerHeight;
 
-        // Coordonnées du clic
         let x = e.pageX;
         let y = e.pageY;
 
-        // Ajuster pour rester dans la fenêtre
         if (x + modalWidth + 10 > viewportWidth) {
-            x = x - modalWidth - 10; // Placer à gauche si ça dépasse à droite
+            x = x - modalWidth - 10;
         } else {
-            x = x + 10; // Placer à droite du clic
+            x = x + 10;
         }
 
         if (y + modalHeight + 10 > viewportHeight) {
-            y = y - modalHeight - 10; // Placer au-dessus si ça dépasse en bas
+            y = y - modalHeight - 10;
         }
 
-        // Appliquer la position
         modal.style.left = `${x}px`;
         modal.style.top = `${y}px`;
         modal.style.display = 'block';
     });
 });
 
-// Fermer la fenêtre modale
-closeModal.addEventListener('click', () => {
-    modal.style.display = 'none';
-});
 
 // Fermer la fenêtre en cliquant à l'extérieur
 document.addEventListener('click', (e) => {
