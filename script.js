@@ -197,8 +197,9 @@ document.querySelectorAll('.element').forEach(element => {
         }
 
         modal.style.left = `${x}px`;
-        modal.style.top = `${y}px`;
+        modal.style.top = `${y}px`;        
         modal.style.display = 'block';
+        createAtomVisualization(elementNumber); // Génère l'animation 3D
     });
 });
 
@@ -209,3 +210,53 @@ document.addEventListener('click', (e) => {
         modal.style.display = 'none';
     }
 });
+
+function createAtomVisualization(elementNumber) {
+    const container = document.getElementById('three-container');
+    container.innerHTML = ''; // Nettoyer l'ancien rendu
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+    container.appendChild(renderer.domElement);
+
+    // Création du noyau
+    const nucleusGeometry = new THREE.SphereGeometry(1, 32, 32);
+    const nucleusMaterial = new THREE.MeshBasicMaterial({ color: 0xff0000 });
+    const nucleus = new THREE.Mesh(nucleusGeometry, nucleusMaterial);
+    scene.add(nucleus);
+
+    // Création des électrons (approximation des couches électroniques)
+    const electronMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+    const electronConfigs = [2, 8, 18, 32, 32, 18, 8]; // Nombre max par couche
+    let radius = 2;
+
+    let remainingElectrons = elementNumber;
+    for (let i = 0; i < electronConfigs.length; i++) {
+        let electronsInShell = Math.min(remainingElectrons, electronConfigs[i]);
+        for (let j = 0; j < electronsInShell; j++) {
+            const angle = (j / electronsInShell) * Math.PI * 2;
+            const electronGeometry = new THREE.SphereGeometry(0.2, 16, 16);
+            const electron = new THREE.Mesh(electronGeometry, electronMaterial);
+
+            electron.position.x = radius * Math.cos(angle);
+            electron.position.z = radius * Math.sin(angle);
+
+            scene.add(electron);
+        }
+        radius += 1.5;
+        remainingElectrons -= electronsInShell;
+        if (remainingElectrons <= 0) break;
+    }
+
+    camera.position.z = 5;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        nucleus.rotation.y += 0.01;
+        renderer.render(scene, camera);
+    }
+
+    animate();
+}
