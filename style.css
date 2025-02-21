@@ -177,13 +177,23 @@ body {
 }
 
 /* Style pour la légende */
-.legend {
-    margin: 20px auto;
+.legend-container {
+    width: 100%;
     max-width: 1000px;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .legend-container h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .legend {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
     justify-content: center;
+    gap: 15px;
   }
   
   .legend-item {
