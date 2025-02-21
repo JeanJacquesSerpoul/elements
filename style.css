@@ -11,7 +11,7 @@
     display: grid;
     grid-template-columns: repeat(18, 60px);
     grid-gap: 5px;
-    max-width: 1000px;
+    max-width: 1300px;
 }
 
 /* Style des éléments */
