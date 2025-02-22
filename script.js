@@ -141,17 +141,16 @@ elements.forEach(element => {
     const div = document.createElement('div');
     div.classList.add('element', element.category);
     div.dataset.number = element.number;
-    div.dataset.name = element.name;
+    div.dataset.name = element.name; // Toujours utile pour la modale
     div.dataset.symbol = element.symbol;
     div.dataset.electronConfig = element.electronConfig;
-    div.dataset.category = element.category; // Ajout de la catégorie
+    div.dataset.category = element.category; // Catégorie ajoutée précédemment
     div.style.gridRow = element.row;
     div.style.gridColumn = element.col;
     div.innerHTML = `
                 <div class="number">${element.number}</div>
                 <div class="symbol">${element.symbol}</div>
-                <div class="name">${element.name}</div>
-            `;
+            `; // Suppression de <div class="name">${element.name}</div>
     periodicTable.appendChild(div);
 });
 
