@@ -137,7 +137,6 @@ for (let row = 1; row <= 9; row++) {
     }
 }
 
-// Génération des éléments
 elements.forEach(element => {
     const div = document.createElement('div');
     div.classList.add('element', element.category);
@@ -145,6 +144,7 @@ elements.forEach(element => {
     div.dataset.name = element.name;
     div.dataset.symbol = element.symbol;
     div.dataset.electronConfig = element.electronConfig;
+    div.dataset.category = element.category; // Ajout de la catégorie
     div.style.gridRow = element.row;
     div.style.gridColumn = element.col;
     div.innerHTML = `
@@ -159,15 +159,22 @@ elements.forEach(element => {
 const modal = document.getElementById('elementModal');
 const modalSymbol = document.getElementById('modalSymbol');
 const modalName = document.getElementById('modalName');
+const modalCategory = document.getElementById('modalCategory'); // Ajout
 const modalElectronConfig = document.getElementById('modalElectronConfig');
 const closeModal = document.getElementById('closeModal');
 
-// Afficher la fenêtre modale à côté du clic/toucher
 document.querySelectorAll('.element').forEach(element => {
     element.addEventListener('click', (e) => {
         // Remplir les informations
         modalSymbol.textContent = element.dataset.symbol;
         modalName.textContent = element.dataset.name;
+        
+        // Formater la catégorie (optionnel : rendre plus lisible)
+        const category = element.dataset.category
+            .replace(/-/g, ' ') // Remplacer les tirets par des espaces
+            .replace(/\b\w/g, char => char.toUpperCase()); // Mettre la première lettre de chaque mot en majuscule
+        modalCategory.textContent = `Catégorie: ${category}`;
+        
         modalElectronConfig.textContent = `Configuration électronique: ${element.dataset.electronConfig}`;
 
         // Positionner la fenêtre
